@@ -13,10 +13,9 @@ public class BinarySearchTree {
         }
     }
 
-
     private Node buildTree(int[] array, int start, int end) {
         // Base case
-        if (start > end){
+        if (start > end) {
             return null;
         }
 
@@ -37,7 +36,7 @@ public class BinarySearchTree {
         this.root = buildTree(data, 0, data.length - 1);
     }
 
-    private void prettyPrint(Node node, String prefix, Boolean isLeft){
+    private void prettyPrint(Node node, String prefix, Boolean isLeft) {
         if (node == null) {
             return;
         }
@@ -51,13 +50,53 @@ public class BinarySearchTree {
         }
     }
 
-    private void prettyPrint(Node node){
+    private void prettyPrint(Node node) {
         prettyPrint(node, "", true);
+    }
+
+    public void preorderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.value + " ");
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
+    }
+
+    public void inorderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        inorderTraversal(node.left);
+        System.out.print(node.value + " ");
+        inorderTraversal(node.right);
+    }
+
+    public void postorderTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        postorderTraversal(node.left);
+        postorderTraversal(node.right);
+        System.out.print(node.value + " ");
     }
 
     public static void main(String[] args) {
         int[] sampleData = {0, 23, 4, 18, 274, 33, 40, 8, 11, 105};
         BinarySearchTree tree = new BinarySearchTree(sampleData);
         tree.prettyPrint(tree.root);
+
+        System.out.println("Preorder Traversal:");
+        tree.preorderTraversal(tree.root);
+
+        System.out.println();
+
+        System.out.println("Inorder Traversal:");
+        tree.inorderTraversal(tree.root);
+
+        System.out.println();
+
+        System.out.println("Postorder Traversal:");
+        tree.postorderTraversal(tree.root);
     }
 }
