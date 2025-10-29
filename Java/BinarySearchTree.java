@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BinarySearchTree {
@@ -81,22 +82,58 @@ public class BinarySearchTree {
         System.out.print(node.value + " ");
     }
 
+    public void reverseTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+        reverseTraversal(node.right);
+        System.out.print(node.value + " ");
+        reverseTraversal(node.left);
+    }
+
+    public void levelOrder(Node node) {
+        ArrayList<Node> queue = new ArrayList<Node>();
+
+        queue.add(node);
+        while (!queue.isEmpty()) {
+            Node temp = queue.remove(0);
+            System.out.print(temp.value + " ");
+            if (temp.left != null) {
+                queue.add(temp.left);
+            }
+            if (temp.right != null) {
+                queue.add(temp.right);
+            }
+        }
+
+    }
+
     public static void main(String[] args) {
         int[] sampleData = {0, 23, 4, 18, 274, 33, 40, 8, 11, 105};
         BinarySearchTree tree = new BinarySearchTree(sampleData);
         tree.prettyPrint(tree.root);
 
-        System.out.println("Preorder Traversal:");
+        System.out.println("PreOrder Traversal:");
         tree.preorderTraversal(tree.root);
 
         System.out.println();
 
-        System.out.println("Inorder Traversal:");
+        System.out.println("InOrder Traversal:");
         tree.inorderTraversal(tree.root);
 
         System.out.println();
 
-        System.out.println("Postorder Traversal:");
+        System.out.println("Reverse Traversal:");
+        tree.reverseTraversal(tree.root);
+
+        System.out.println();
+
+        System.out.println("PostOrder Traversal:");
         tree.postorderTraversal(tree.root);
+
+        System.out.println();
+
+        System.out.println("LevelOrder Traversal");
+        tree.levelOrder(tree.root);
     }
 }
